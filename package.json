@@ -1,0 +1,8 @@
+{
+  "name": "shop-template",
+  "private": true,
+  "version": "0.1.0",
+  "dependencies": {
+    "stripe": "^22.0.2"
+  }
+}

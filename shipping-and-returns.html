@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shipping &amp; Returns</title>
+  <style>
+    @font-face {
+      font-family: 'IBM Plex Mono';
+      src: url('/fonts/IBMPlexMono-SemiBold.ttf') format('truetype');
+      font-weight: 600;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: 'IBM Plex Mono';
+      src: url('/fonts/IBMPlexMono-Regular.ttf') format('truetype');
+      font-weight: 400;
+      font-style: normal;
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'IBM Plex Mono', monospace;
+      background: #fff;
+      color: #333;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .page {
+      max-width: 640px;
+      margin: 0 auto;
+      padding: 4rem 2rem 6rem;
+    }
+
+    .back-link {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(0, 0, 0, 0.35);
+      text-decoration: none;
+      margin-bottom: 3rem;
+      transition: color 0.2s;
+    }
+    .back-link:hover { color: #333; }
+
+    h1 {
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(0, 0, 0, 0.35);
+      margin-bottom: 2.5rem;
+    }
+
+    h2 {
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #333;
+      margin-top: 2.5rem;
+      margin-bottom: 0.75rem;
+    }
+
+    p {
+      font-size: 0.82rem;
+      font-weight: 400;
+      line-height: 1.7;
+      color: rgba(0, 0, 0, 0.6);
+      margin-bottom: 1rem;
+    }
+
+    .divider {
+      border: none;
+      border-top: 1px solid rgba(0, 0, 0, 0.1);
+      margin: 3rem 0 0.5rem;
+    }
+
+    a { color: #333; }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <a href="javascript:history.back()" class="back-link">&larr; Back</a>
+    <h1>Shipping &amp; Returns</h1>
+
+    <div id="shipping-content">
+      <p style="color:rgba(0,0,0,0.3);">Loading...</p>
+    </div>
+
+    <hr class="divider">
+
+    <h2>Returns</h2>
+    <div id="returns-content">
+      <p style="color:rgba(0,0,0,0.3);">Loading...</p>
+    </div>
+  </div>
+
+  <script>
+    fetch('/content/settings.json?t=' + Date.now())
+      .then(function(r) { return r.ok ? r.json() : {}; })
+      .then(function(settings) {
+        var ship = settings.shipping || {};
+        var method = ship.method || 'free';
+        var shippingEl = document.getElementById('shipping-content');
+        var returnsEl = document.getElementById('returns-content');
+
+        var html = '';
+
+        if (method === 'pickup') {
+          html += '<h2>Local Pickup</h2>';
+          html += '<p>Orders are available for local pickup.</p>';
+          if (ship.pickup_address) html += '<p><strong>Address:</strong> ' + ship.pickup_address + '</p>';
+          if (ship.pickup_hours) html += '<p><strong>Hours:</strong> ' + ship.pickup_hours + '</p>';
+        } else {
+          html += '<h2>Delivery</h2>';
+          html += '<p>We currently ship to the <strong>United States only</strong>.';
+          if (ship.delivery_days) {
+            html += ' Orders typically arrive within <strong>' + ship.delivery_days + ' business days</strong> after shipping.';
+          }
+          html += '</p>';
+
+          html += '<h2>Shipping Cost</h2>';
+          if (method === 'free') {
+            html += '<p>We offer <strong>free shipping</strong> on all orders.</p>';
+          } else if (method === 'flat') {
+            if (ship.free_threshold) {
+              html += '<p>Orders over <strong>$' + ship.free_threshold + '</strong> qualify for free shipping, applied automatically at checkout.</p>';
+            }
+          }
+        }
+
+        shippingEl.innerHTML = html;
+
+        // Returns
+        if (ship.returns_policy) {
+          var paragraphs = ship.returns_policy.split(/\n\n|\n/).filter(function(p) { return p.trim(); });
+          returnsEl.innerHTML = paragraphs.map(function(p) { return '<p>' + p + '</p>'; }).join('');
+        } else {
+          returnsEl.innerHTML = '<p>Contact us for return information.</p>';
+        }
+      })
+      .catch(function() {
+        document.getElementById('shipping-content').innerHTML = '<p>Could not load shipping policy.</p>';
+      });
+  </script>
+</body>
+</html>

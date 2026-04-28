@@ -1,0 +1,15 @@
+{
+  "logo": "",
+  "font": "IBM Plex Mono",
+  "gradients": [
+    ["#fafafa", "#f5f4f0"],
+    ["#fdf9e7", "#fbe998"],
+    ["#e9f8fb", "#b8babc"],
+    ["#ffffff", "#cccccc"]
+  ],
+  "categories": [
+    { "slug": "rings", "label": "RINGS" },
+    { "slug": "necklaces", "label": "NECKLACES" },
+    { "slug": "earrings", "label": "EARRINGS" }
+  ]
+}

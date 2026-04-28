@@ -1,0 +1,14 @@
+{
+  "meta_pixel_id": "",
+  "secondary_cta": null,
+  "shipping": {
+    "method": "free",
+    "stripe_rate_id": "",
+    "free_threshold": null,
+    "pickup_address": "",
+    "pickup_hours": "",
+    "delivery_days": "",
+    "returns_policy": ""
+  },
+  "contact": {}
+}

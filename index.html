@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- META:START -->
+  <!-- These tags are populated at boot by js/main.js from /api/config and /content/settings.json -->
+  <title>Store</title>
+  <meta name="description" content="">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="">
+  <meta property="og:description" content="">
+  <meta property="og:image" content="">
+  <meta property="og:url" content="">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="">
+  <meta name="twitter:description" content="">
+  <meta name="twitter:image" content="">
+  <!-- META:END -->
+  <link rel="stylesheet" href="/css/style.css">
+  <!-- Meta Pixel base (init called dynamically from content/settings.json) -->
+  <script>
+    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+    n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+    document,'script','https://connect.facebook.net/en_US/fbevents.js');
+  </script>
+  <!-- End Meta Pixel -->
+</head>
+<body>
+  <!-- HOMEPAGE: Product grid (populated by JS) -->
+  <section id="home" class="home">
+    <div class="home-grid" id="home-grid"></div>
+  </section>
+
+  <!-- TOP HEADER NAV (visible when a section is open) -->
+  <header id="header" class="header">
+    <nav class="header-nav">
+      <img src="/images/placeholder.svg" alt="" id="header-logo" class="header-logo">
+      <div class="header-links" id="header-links">
+        <a href="/rings" class="header-link" data-section="rings">RINGS</a>
+        <a href="/necklaces" class="header-link" data-section="necklaces">NECKLACES</a>
+        <a href="/earrings" class="header-link" data-section="earrings">EARRINGS</a>
+        <a href="/about" class="header-link" data-section="about">ABOUT</a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      </div>
+      <button class="cart-toggle" id="cart-toggle" aria-label="Cart">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"></path>
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <path d="M16 10a4 4 0 01-8 0"></path>
+        </svg>
+        <span class="cart-badge" id="cart-badge" style="display:none;">0</span>
+      </button>
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </nav>
+  </header>
+
+  <!-- SECTION: ART (populated by JS) -->
+  <section id="section-art" class="section">
+    <div class="art-layout">
+      <aside class="art-sidebar">
+        <ul class="art-nav" id="art-nav"></ul>
+      </aside>
+      <main class="art-content" id="art-content"></main>
+    </div>
+  </section>
+
+  <!-- SECTION: NECKLACES (populated by JS) -->
+  <section id="section-necklaces" class="section">
+    <div class="art-layout">
+      <aside class="art-sidebar">
+        <ul class="art-nav" id="necklaces-nav"></ul>
+      </aside>
+      <main class="art-content" id="necklaces-content"></main>
+    </div>
+  </section>
+
+  <!-- SECTION: RINGS (populated by JS) -->
+  <section id="section-rings" class="section">
+    <div class="art-layout">
+      <aside class="art-sidebar">
+        <ul class="art-nav" id="rings-nav"></ul>
+      </aside>
+      <main class="art-content" id="rings-content"></main>
+    </div>
+  </section>
+
+  <!-- SECTION: CONSULTING (populated by JS) -->
+  <section id="section-consulting" class="section section-consulting">
+    <div class="consulting-inner" id="consulting-inner">
+      <div class="consulting-bg" id="consulting-bg"></div>
+      <div class="consulting-overlay"></div>
+      <div class="consulting-text" id="consulting-text"></div>
+    </div>
+  </section>
+
+  <!-- SECTION: ABOUT -->
+  <section id="section-about" class="section section-about">
+    <div class="art-layout about-layout">
+      <aside class="art-sidebar about-sidebar">
+        <div class="about-text" id="about-text"></div>
+        <div class="about-links">
+          <div id="about-contact"></div>
+          <a href="/shipping-and-returns.html">Shipping &amp; Returns</a>
+          <a href="/privacy.html">Privacy Policy</a>
+        </div>
+      </aside>
+      <main class="art-content about-content" id="about-content"></main>
+    </div>
+  </section>
+
+  <!-- SECTION: NOT FOUND -->
+  <section id="section-not-found" class="section section-not-found">
+    <div class="not-found-inner">
+      <h1 class="not-found-title">404</h1>
+      <p class="not-found-message">This page doesn't exist.</p>
+      <a href="/" class="not-found-link" data-section="home">Back home</a>
+    </div>
+  </section>
+
+  <!-- CART SLIDE-OUT PANEL -->
+  <div id="cart-overlay" class="cart-overlay"></div>
+  <aside id="cart-panel" class="cart-panel">
+    <div class="cart-header">
+      <h2 class="cart-title">CART</h2>
+      <button class="cart-close" id="cart-close" aria-label="Close cart">&times;</button>
+    </div>
+    <div class="cart-items" id="cart-items">
+      <p class="cart-empty" id="cart-empty">Your cart is empty.</p>
+    </div>
+    <div class="cart-footer" id="cart-footer" style="display:none;">
+      <button class="cart-checkout-btn" id="cart-checkout-btn">CHECKOUT</button>
+      <div class="cart-shipping-note" id="cart-footer-shipping"></div>
+    </div>
+  </aside>
+
+  <!-- THANK YOU OVERLAY (shown after successful checkout) -->
+  <div id="thankyou-overlay" class="thankyou-overlay" style="display:none;">
+    <div class="thankyou-box">
+      <p class="thankyou-primary" id="thankyou-primary-text">Thank you for your order!</p>
+      <p class="thankyou-secondary" id="thankyou-secondary-text"></p>
+      <div id="thankyou-contact" class="thankyou-contact"></div>
+      <button class="thankyou-close" id="thankyou-close">Continue</button>
+    </div>
+  </div>
+
+  <!-- FULLSCREEN LIGHTBOX -->
+  <div id="lightbox" class="lightbox">
+    <button class="lightbox-close" aria-label="Close">&times;</button>
+    <button class="lightbox-prev" aria-label="Previous">&#8249;</button>
+    <button class="lightbox-next" aria-label="Next">&#8250;</button>
+    <img class="lightbox-img" src="" alt="">
+    <div class="lightbox-counter"></div>
+  </div>
+
+  <script src="/js/main.js"></script>
+</body>
+</html>
